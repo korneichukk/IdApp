@@ -17,6 +17,7 @@ black = "^23.7.0"
 ruff = "^0.0.284"
 pyright = "^1.1.323"
 alembic = "^1.11.3"
+python-multipart = "^0.0.6"
 
 
 [build-system]
