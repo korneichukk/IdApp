@@ -19,7 +19,7 @@ class UpworkJob(UpworkJobBase):
     category_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # Upwork Category schema
@@ -37,4 +37,4 @@ class UpworkCategory(UpworkCategoryBase):
     jobs: List[UpworkJob] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
