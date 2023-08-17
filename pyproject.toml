@@ -7,6 +7,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+fastapi = "^0.101.1"
+uvicorn = "^0.23.2"
+pydantic = "^2.1.1"
+pydantic-settings = "^2.0.3"
+mysql-connector-python = "^8.1.0"
+sqlalchemy = "^2.0.20"
+black = "^23.7.0"
+ruff = "^0.0.284"
+pyright = "^1.1.323"
 
 
 [build-system]
