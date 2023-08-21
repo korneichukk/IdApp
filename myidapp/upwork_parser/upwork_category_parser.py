@@ -6,7 +6,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.common.exceptions import NoSuchElementException
 
 from sqlalchemy.orm import Session
-from typing import List, Tuple, Optional, Dict
+from typing import List, Optional, Dict
 import time
 
 from myidapp.database import crud, database, models, schemas
@@ -21,7 +21,8 @@ class UpworkCategoryParser:
     def set_driver(self, headless: bool = False) -> None:
         """Set driver as new instance attribute
         Args:
-            headless (bool, optional): Should driver run in headless (without windows) mode. Defaults to False.
+            headless (bool, optional): Should driver run in headless
+            (without windows) mode. Defaults to False.
         """
         logger.info("UpworkCategoryParser set_driver")
         if hasattr(self, "driver"):
@@ -51,7 +52,8 @@ class UpworkCategoryParser:
         logger.info("UpworkCategoryParser parse_categories")
         search_options = self.parse_search_options()
         logger.info(
-            f"UpworkCategoryParser parse_categories: search_options parsed len:{len(search_options)}"
+            f"UpworkCategoryParser parse_categories: "
+            f"search_options parsed len:{len(search_options)}"
         )
 
         categories = []

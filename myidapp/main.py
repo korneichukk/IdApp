@@ -26,7 +26,7 @@ async def root():
 @app.get("/collect_categories", response_model=list[schemas.UpworkCategory])
 async def collect_categories(db: Session = Depends(get_db)):
     parser = UpworkCategoryParser()
-    collected_categories = parser.run(db=db)
+    parser.run(db=db)
 
 
 @app.get("/categories", response_model=list[schemas.UpworkCategory])
