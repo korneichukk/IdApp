@@ -5,7 +5,7 @@ from . import models, schemas
 
 # Category CRUD
 # Create
-def create_upwork_category(db: Session, category: schemas.UpworkCategoryCreate):
+def insert_upwork_category(db: Session, category: schemas.UpworkCategoryCreate):
     db_category = models.UpworkCategory(name=category.name, link=category.link)
     db.add(db_category)
     db.commit()
@@ -26,7 +26,7 @@ def flush_all_upwork_categories(db: Session):
 
 # Job CRUD
 # Create
-def create_upwork_job(db: Session, job: schemas.UpworkJobCreate, category_id: int):
+def insert_upwork_job(db: Session, job: schemas.UpworkJobCreate, category_id: int):
     db_job = models.UpworkJob(vars(job), category_id=category_id)
     db.add(db_job)
     db.commit()

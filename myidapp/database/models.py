@@ -16,6 +16,9 @@ class UpworkCategory(Base):
         "UpworkJob", back_populates="category", cascade="all, delete"
     )
 
+    def __str__(self):
+        return f"Upwork category: {self.name}"
+
     def __repr__(self):
         return f"<UpworkCategory(id={self.id}, name={self.name}, link={self.link})>"
 
@@ -35,4 +38,4 @@ class UpworkJob(Base):
     )
 
     def __repr__(self):
-        return f"<UpworkJob(id={self.id}, title={self.title}, link={self.link}, description={self.description}, time_posted={self.time_posted}, category_id={self.category.name})>"
+        return f"<UpworkJob(id={self.id}, title={self.title}, link={self.link}"

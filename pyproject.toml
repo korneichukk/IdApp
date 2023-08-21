@@ -18,7 +18,16 @@ ruff = "^0.0.284"
 pyright = "^1.1.323"
 alembic = "^1.11.3"
 python-multipart = "^0.0.6"
+selenium = "^4.11.2"
+webdriver-manager = "^4.0.0"
+colorlog = "^6.7.0"
+browsermob-proxy = "^0.8.0"
+selenium-wire = "^5.1.0"
+undetected-chromedriver = "^3.5.2"
 
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.25.1"
 
 [build-system]
 requires = ["poetry-core"]

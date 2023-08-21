@@ -4,6 +4,11 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     APP_NAME: str = "MyIDApp"
+    DB_USERNAME: str = ""
+    DB_PASSWORD: str = ""
+    DB_HOST: str = ""
+    DB_NAME: str = ""
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
@@ -11,13 +16,6 @@ class Settings(BaseSettings):
     )
 
 
-class DatabaseSettings(Settings):
-    DB_USERNAME: str = ""
-    DB_PASSWORD: str = ""
-    DB_HOST: str = ""
-    DB_NAME: str = ""
-
-
 @lru_cache()
-def get_database_settings():
-    return DatabaseSettings()  # type: ignore[reportGeneralTypeIssues]
+def get_settings():
+    return Settings()  # type: ignore[reportGeneralTypeIssues]

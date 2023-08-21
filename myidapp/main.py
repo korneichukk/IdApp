@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from .database import models, schemas, crud
 from .database.database import SessionLocal, engine
+from .upwork_parser.upwork_category_parser import UpworkCategoryParser
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -22,7 +23,15 @@ async def root():
     return {"message": "message"}
 
 
+@app.get("/collect_categories", response_model=list[schemas.UpworkCategory])
+async def collect_categories(db: Session = Depends(get_db)):
+    parser = UpworkCategoryParser()
+    collected_categories = parser.run(db=db)
+
+
 @app.get("/categories", response_model=list[schemas.UpworkCategory])
-async def get_categories(skip: int = 0, limit: int = 0, db: Session = Depends(get_db)):
-    users = crud.get_all_upwork_categories(db, skip=skip, limit=limit)
-    return users
+async def get_categories(
+    skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
+):
+    categories = crud.get_all_upwork_categories(db, skip=skip, limit=limit)
+    return categories
