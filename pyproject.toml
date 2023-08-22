@@ -24,6 +24,8 @@ colorlog = "^6.7.0"
 browsermob-proxy = "^0.8.0"
 selenium-wire = "^5.1.0"
 undetected-chromedriver = "^3.5.2"
+coloredlogs = "^15.0.1"
+haralyzer = "^2.4.0"
 
 
 [tool.poetry.group.dev.dependencies]

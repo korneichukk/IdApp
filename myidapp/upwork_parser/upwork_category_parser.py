@@ -59,10 +59,10 @@ class UpworkCategoryParser:
         categories = []
         for option in search_options:
             category = self.parse_li_option(option)
-            time.sleep(1)
             categories.append(category)
             self.insert_category_into_database(category, db=db)
 
+        self.driver.quit()
         return categories
 
     def parse_search_options(self) -> List[WebElement]:
@@ -86,7 +86,6 @@ class UpworkCategoryParser:
         Returns:
             Tuple[str, str]: category name and link
         """
-        # self.click_remove_filters_button()
         self.click_search_options()
         result = {}
         name = option.text.strip()
@@ -98,9 +97,13 @@ class UpworkCategoryParser:
             logger.warning(
                 f"UpworkCategoryParser parse_li_option: CANNOT CLICK OPTION: {e}"
             )
+
+        time.sleep(1)
         option_url = self.get_page_url()
 
         result["url"] = option_url
+        logger.info(f"UpworkCategoryParser parse_li_option: {result}")
+        self.click_remove_filters_button()
         return result
 
     def get_page_url(self) -> str:
@@ -124,8 +127,9 @@ class UpworkCategoryParser:
     def click_remove_filters_button(self) -> None:
         try:
             self.driver.find_element(
-                By.CSS_SELECTOR, "button.up-btn.up-btn-link.m-0.px-0"
-            ).click()
+                By.XPATH,
+                '//*[@id="main"]/div/div/div/div/div[2]/div/div/div/section/div[3]',
+            ).find_elements(By.TAG_NAME, "button")[-1].click()
         except Exception as e:
             logger.error(
                 f"UpworkCategoryParser click_remove_filters_button: {e}",
@@ -145,8 +149,3 @@ class UpworkCategoryParser:
 
     def flush_all_categories_from_database(self, db: Optional[Session] = None) -> None:
         crud.flush_all_upwork_categories(db=db or database.SessionLocal())
-
-
-if __name__ == "__main__":
-    ucp = UpworkCategoryParser()
-    print(ucp.run())

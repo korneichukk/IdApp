@@ -18,6 +18,22 @@ def get_all_upwork_categories(db: Session, skip: int = 0, limit: int = 0):
     return db.query(models.UpworkCategory).offset(skip).limit(limit).all()
 
 
+def get_category_by_name(db: Session, name: str):
+    return (
+        db.query(models.UpworkCategory)
+        .filter(models.UpworkCategory.name == name)
+        .first()
+    )
+
+
+def get_category_by_partial_name(db: Session, name: str):
+    return (
+        db.query(models.UpworkCategory)
+        .filter(models.UpworkCategory.name.like(f"%{name}%"))
+        .first()
+    )
+
+
 # Delete
 def flush_all_upwork_categories(db: Session):
     db.query(models.UpworkCategory).delete()
